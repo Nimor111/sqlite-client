@@ -26,7 +26,12 @@ var idx = null
 const docMap = new Map()
 
 function prepareIdxAndDocMap() {
-  const docs = [          
+  const docs = [    
+    {
+      "title": "Intro",
+      "url": "/sqlite-client/docs/",
+      "content": "Introduction"
+    } ,        
   ];
 
   idx = lunr(function () {
