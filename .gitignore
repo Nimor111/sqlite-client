@@ -1,2 +1,11 @@
 *.class
 *.log
+
+*.db
+*.org
+
+**/target/
+
+**/.bloop/
+**/.metals/
+**/.bsp/

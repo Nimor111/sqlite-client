@@ -1,0 +1,5 @@
+package sqlite
+
+object Main extends App {
+  println("Hello, World!")
+}
