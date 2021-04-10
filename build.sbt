@@ -46,6 +46,8 @@ lazy val microsite = project
   .settings(
     scalaVersion := scalaVersion_2_13,
     micrositeName := "sqlite-client",
+    micrositeBaseUrl := "sqlite-client",
+    micrositeDocumentationUrl := "docs",
     micrositeDescription := "A functional wrapper around the JDBC API for sqlite",
     micrositeAuthor := "Georgi Bozhinov",
     micrositeGithubOwner := "Nimor111",
