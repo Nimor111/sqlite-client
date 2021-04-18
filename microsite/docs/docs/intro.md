@@ -145,7 +145,7 @@ for {
 
 ### Without params
 
-```scala
+```scala mdoc:compile-only
 for {
   conn <- d.getConnection()
 
@@ -160,7 +160,7 @@ for {
 
 ### With params
 
-```scala
+```scala mdoc:compile-only
 for {
   conn <- d.getConnection()
 
