@@ -267,7 +267,6 @@ case class DBConnection(conn: Connection) {
     }
     val classMirror = currentMirror.reflectClass(classSymbol)
     val instance = classMirror.reflectConstructor(constructorSymbol)
-    val instanceMirror = currentMirror.reflect(instance)
 
     // list of fields, same as above
     (fieldTypes

@@ -33,7 +33,7 @@ object DatabaseExample extends App {
         ModelField(name),
         DoubleField(capacity),
         OptionalField(numItems.map(IntField))
-      )
+     )
   }
 
   val d = Database("jdbc:sqlite:database.db")

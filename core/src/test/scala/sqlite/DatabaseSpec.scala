@@ -27,7 +27,7 @@ class DatabaseSpec extends AnyFlatSpec {
           name text NOT NULL,
           capacity real);
         """
-      _ <- conn.executeUpdate(createTableSql).managed(conn.conn)
+      _ <- conn.executeUpdate(createTableSql)
     } yield ())
 
     assert(c == Right(()))
@@ -44,15 +44,15 @@ class DatabaseSpec extends AnyFlatSpec {
           name text NOT NULL,
           capacity real);
         """
-      _ <- conn.executeUpdate(createTableSql).managed(conn.conn)
+      _ <- conn.executeUpdate(createTableSql)
       insertWarehouseSQL = """
       INSERT INTO warehouses(id, name, capacity) VALUES (?, ?, ?)
       """
-      _ <- conn.executeUpdate(insertWarehouseSQL, w).managed(conn.conn)
+      _ <- conn.executeUpdate(insertWarehouseSQL, w)
       querySQL = """
       SELECT * FROM warehouses;
       """
-      w <- conn.executeQuery[Warehouse](querySQL).managed(conn.conn)
+      w <- conn.executeQuery[Warehouse](querySQL)
       _ <- conn.close()
     } yield w
 
