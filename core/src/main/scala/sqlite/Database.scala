@@ -32,14 +32,17 @@ import Types._
 
 object TryUtil {
   implicit class TryOps[T](value: Try[T]) {
+    import EitherUtil._
+
     def toSQLException: SQLEither[T] =
-      value.fold(ex => Left(List(new SQLException(ex.getMessage))), Right(_))
+      value
+        .fold(ex => Left(List(new SQLException(ex.getMessage))), Right(_))
+        .toNonNullEither(List(new SQLException("Expected a value, got null")))
 
     def toSQLException[U](f: T => U): SQLEither[U] =
-      value.fold(
-        ex => Left(List(new SQLException(ex.getMessage))),
-        v => Right(f(v))
-      )
+      value
+        .fold(ex => Left(List(new SQLException(ex.getMessage))), Right(_))
+        .toNonNullEither(List(new SQLException("Expected a value, got null")), f)
   }
 }
 
@@ -56,6 +59,16 @@ object EitherUtil {
         case Left(err) => Left(f(err))
         case Right(v)  => Right(g(v))
       }
+
+    def toNonNullEither(err: E): Either[E, T] = value.flatMap(s => s match {
+      case null => Left(err)
+      case v => Right(v)
+    })
+
+    def toNonNullEither[U](err: E, f: T => U): Either[E, U] = value.flatMap(s => s match {
+      case null => Left(err)
+      case v => Right(f(v))
+    })
   }
 
   implicit class EitherListOps[E, T](eithers: List[Either[E, T]]) {
